@@ -1,0 +1,37 @@
+version: '3'
+
+tasks:
+  start:
+    desc: "Build and start the application"
+    cmds:
+      - docker compose -f deploy/docker-compose.yaml --env-file deploy/.env -p url-shortener up -d --build
+
+  stop:
+    desc: "Stop the application"
+    cmds:
+      - docker compose -f deploy/docker-compose.yaml --env-file deploy/.env -p url-shortener down
+
+  unit-test:
+    desc: "Run unit tests"
+    cmds:
+      - go test -v ./internal/...
+
+  gen-mocks:
+    desc: "Generate mocks"
+    cmds:
+      -  go generate ./...
+
+  migrate-up:
+    desc: "Apply all pending database migrations"
+    cmds:
+      - docker exec -it avito-shop-service /migrator up
+
+  migrate-down:
+    desc: "Rollback the last database migration"
+    cmds:
+      - docker exec -it avito-shop-service /migrator down
+
+  migrate-create:
+    desc: "Create a new migration (usage: task migrate-create name=<migration_name>)"
+    cmds:
+      - migrate create -ext sql -dir migrations -seq {{.name}}

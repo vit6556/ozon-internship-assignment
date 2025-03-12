@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS urls (
+    id SERIAL PRIMARY KEY,
+    source_url TEXT NOT NULL UNIQUE,
+    alias VARCHAR(10) NOT NULL UNIQUE,
+    created_at TIMESTAMP DEFAULT NOW()
+);

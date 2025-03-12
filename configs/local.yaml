@@ -1,0 +1,5 @@
+db_type: postgres
+alias:
+  length: 10
+  generation_retries: 5
+  charset: abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_
