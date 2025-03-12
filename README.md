@@ -25,28 +25,30 @@
 ### 1️⃣ Установите `Task`
 ```sh
 go install github.com/go-task/task/v3/cmd/task@latest
-export PATH=$PATH:$(go env GOPATH)/bin
 ```
 
 ### 2️⃣ Установите `golang-migrate`
 ```sh
 go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
-export PATH=$PATH:$(go env GOPATH)/bin
 ```
 
 ### 3️⃣ Установите `mockery`
 ```sh
 go install github.com/vektra/mockery/v2@latest
+```
+
+### 4️⃣ Добавьте Go в PATH
+```sh
 export PATH=$PATH:$(go env GOPATH)/bin
 ```
 
-### 4️⃣ Скопируйте и настройте `.env` файл
+### 5️⃣ Скопируйте и настройте `.env` файл
 ```sh
-cp deploy/.env.sample deploy/.env
+cp deploy/.env.example deploy/.env
 ```
 Измените пароли в `deploy/.env`
 
-### 5️⃣ Выбор хранилища
+### 6️⃣ Выбор хранилища
 Тип хранилища задаётся в `configs/local.yaml` параметром `db_type`:
 - **`postgres`** — хранение ссылок в PostgreSQL
 - **`inmemory`** — хранение в памяти (данные теряются при перезапуске)
@@ -56,16 +58,11 @@ cp deploy/.env.sample deploy/.env
 db_type: postgres
 ```
 
-### 6️⃣ Запустите сервис
+### 7️⃣ Запустите сервис
 ```sh
 task start
 ```
 Теперь сервис доступен по адресу [`http://localhost:8080`](http://localhost:8080).
-
-### 7️⃣ Остановите сервис
-```sh
-task stop
-```
 
 ## Генерация моков
 
